@@ -22,19 +22,19 @@ public class Employee {
 	}
 
 	public void adjustSalary(BigDecimal increase) {
-		BigDecimal percentualAdjust = increase.divide(salary, RoundingMode.HALF_UP);
-		if (percentualAdjust.compareTo(new BigDecimal("0.4")) > 0) {
+		BigDecimal percentageAdjustment = increase.divide(salary, RoundingMode.HALF_UP);
+		if (percentageAdjustment.compareTo(new BigDecimal("0.4")) > 0) {
 			throw new Exception("Adjustment cannot be more than 40% of salary!");
 		}
 		this.salary = this.salary.add(increase);
 		this.dateLastReadjustment = LocalDate.now();
 	}
 
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -50,23 +50,23 @@ public class Employee {
 		return position;
 	}
 
-	public void setposition(OfficePosition position) {
+	public void setPosition(OfficePosition position) {
 		this.position = position;
 	}
 
-	public BigDecimal getsalary() {
+	public BigDecimal getSalary() {
 		return salary;
 	}
 
-	public void setsalary(BigDecimal salary) {
+	public void setSalary(BigDecimal salary) {
 		this.salary = salary;
 	}
 
-	public LocalDate getdateLastReadjustment() {
+	public LocalDate getDateLastReadjustment() {
 		return dateLastReadjustment;
 	}
 
-	public void setdateLastReadjustment(LocalDate dateLastReadjustment) {
+	public void setDateLastReadjustment(LocalDate dateLastReadjustment) {
 		this.dateLastReadjustment = dateLastReadjustment;
 	}
 
