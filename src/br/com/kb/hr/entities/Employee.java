@@ -1,10 +1,7 @@
 package br.com.kb.hr.entities;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
-
-import br.com.kb.hr.Exception;
 
 public class Employee {
 
@@ -21,12 +18,8 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public void adjustSalary(BigDecimal increase) {
-		BigDecimal percentageAdjustment = increase.divide(salary, RoundingMode.HALF_UP);
-		if (percentageAdjustment.compareTo(new BigDecimal("0.4")) > 0) {
-			throw new Exception("Adjustment cannot be more than 40% of salary!");
-		}
-		this.salary = this.salary.add(increase);
+	public void updateSalary(BigDecimal newSalary) {
+		this.salary = newSalary;
 		this.dateLastReadjustment = LocalDate.now();
 	}
 
@@ -46,7 +39,7 @@ public class Employee {
 		this.cpf = cpf;
 	}
 
-	public OfficePosition getposition() {
+	public OfficePosition getPosition() {
 		return position;
 	}
 
