@@ -1,19 +1,21 @@
 package br.com.kb.hr.services;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.List;
 
-import br.com.kb.hr.Exception;
 import br.com.kb.hr.entities.Employee;
 
 public class AdjustSalaryService {
+
+    private List<Readjustment> validates;
+
+    public AdjustSalaryService(List<Readjustment> validates) {
+        this.validates = validates;
+    }
+
     public void adjustSalary(Employee employee, BigDecimal increase) {
-        BigDecimal salary = employee.getSalary();
-        BigDecimal percentageAdjustment = increase.divide(salary, RoundingMode.HALF_UP);
-        if (percentageAdjustment.compareTo(new BigDecimal("0.4")) > 0) {
-            throw new Exception("Adjustment cannot be more than 40% of salary!");
-        }
-        BigDecimal adjustedSalary = salary.add(increase);
+        this.validates.forEach((v -> v.validate(employee, increase)));
+        BigDecimal adjustedSalary = employee.getSalary().add(increase);
         employee.updateSalary(adjustedSalary);
     }
 }
